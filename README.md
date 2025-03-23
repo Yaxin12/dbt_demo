@@ -1,87 +1,63 @@
-# Introducetion of dbt(data build tool)
-dbt (data build tool) as a tool that helps you clean, transform, and organize data inside a data warehouse
-![alt text](https://github.com/Yaxin12/dbt_demo/blob/main/image/1.png)
+# **Introduction to dbt (Data Build Tool)**  
+dbt (Data Build Tool) is a powerful tool that helps you clean, transform, and organize data inside a data warehouse. It allows data teams to write modular SQL queries, apply transformations, and manage dependencies efficiently.  
 
-### How dbt Works
-Imagine you have a huge spreadsheet full of messy data—duplicate values, missing numbers, inconsistent formats. Before you can analyze it, you need to clean and organize it. dbt helps you do this automatically using SQL scripts.
+![dbt Workflow](https://github.com/Yaxin12/dbt_demo/blob/main/image/1.png)  
 
-### Key Features of dbt
-1. Transforms Data – dbt takes raw data and cleans it up using SQL.
+## **How dbt Works**  
+Imagine you have a massive dataset filled with inconsistencies—duplicate values, missing entries, and formatting issues. Before you can analyze the data, it must be cleaned and structured. dbt automates this process using SQL scripts, making data transformation easier and more scalable.  
 
-2. Organizes SQL Code – Instead of writing one big SQL query, you can break it into smaller, reusable parts.
+## **Key Features of dbt**  
+- **🔄 Data Transformation** – Cleans and structures raw data using SQL.  
+- **📂 Modular SQL Code** – Allows you to break down complex queries into reusable components.  
+- **📊 DAG (Directed Acyclic Graph)** – Automatically determines dependencies and executes transformations in the correct order.  
+- **✅ Data Testing** – Validates data integrity by checking for errors, duplicates, and missing values.  
+- **📖 Documentation & Lineage Tracking** – Generates reports that explain how data is transformed.  
 
-3. Builds a DAG (Directed Acyclic Graph) – dbt automatically figures out which steps depend on each other and runs them in the right order.
+## **Why Use dbt?**  
+✔ **Automates repetitive SQL tasks**, saving time and reducing errors.  
+✔ **Enhances collaboration**, allowing teams to work together on SQL models.  
+✔ **Ensures data reliability** through built-in testing and documentation.  
 
-4. Tests Data – dbt can check for errors, duplicates, or missing values before you use the data.
+---
 
-5. Documents Everything – It creates reports to explain how data is transformed.
+# **Connecting dbt Cloud (dbt Labs) with BigQuery**  
 
-### Why Use dbt?
-* It saves time by automating repetitive SQL tasks.
+## **1. Set Up a Google Cloud Project**  
+- Ensure you have a **Google Cloud project** with **BigQuery enabled**.  
+- Locate your **Project ID** in the **Google Cloud Console**.  
 
-* It improves teamwork because different people can collaborate on SQL models.
+## **2. Create a Service Account**  
+1. Navigate to **Google Cloud Console** → **IAM & Admin** → **Service Accounts**.  
+2. Click **Create Service Account** and enter a name (e.g., `dbt-bigquery-service-account`).  
+3. Click **Create & Continue**.  
+4. Assign the **BigQuery Admin** role (or a custom role with the required permissions).  
+5. Click **Done**.  
 
-* It makes data pipelines more reliable with testing and documentation.
+## **3. Generate and Download JSON Key**  
+1. Open the **Service Accounts** list and select your newly created account.  
+2. Go to the **Keys** tab.  
+3. Click **Add Key** → **Create new key**.  
+4. Select **JSON format** and download the key file (this will be used to authenticate dbt).  
 
-# Connect dbt Cloud (dbt Labs) with BigQuery
+## **4. Configure dbt Cloud**  
+1. Log in to [dbt Cloud](https://cloud.getdbt.com/).  
+2. Navigate to **Account Settings** → **Projects** → **Create Project**.  
+3. Under **Connection**, select **BigQuery**.  
+4. Upload the **JSON key file** you downloaded earlier.  
+5. Fill in the following details:  
+   - **🆔 Project ID**: Your Google Cloud project ID.  
+   - **📂 Dataset**: The dataset where dbt models will be created.  
+   - **⚙️ Threads**: Default is **4** (adjust based on performance needs).  
+   - **⏳ Timeout**: Default is **300 seconds**.  
 
-### Set Up a Google Cloud Project
-* Ensure you have a Google Cloud project with BigQuery enabled.
+## **5. Test and Save Connection**  
+- Click **Test** to verify the connection.  
+- If successful, click **Save**.  
 
-* Note your Project ID (found in Google Cloud Console).
+## **6. Initialize Your dbt Project**  
+- Once connected, create a **new dbt project**.  
+- Start adding models and run commands like:  
 
-### Create a Service Account
-* Go to the Google Cloud Console → Navigate to IAM & Admin → Service Accounts.
-
-* Click Create Service Account.
-
-* Give it a name, e.g., dbt-bigquery-service-account.
-
-* Click Create & Continue.
-
-* Assign the BigQuery Admin role (or custom roles with necessary permissions).
-
-* Click Done.
-
-### Generate and Download JSON Key
-* In the Service Accounts list, select the service account you just created.
-
-* Go to the "Keys" tab.
-
-* Click Add Key → Create new key.
-
-* Choose JSON format, then Download the key file (it will be used to authenticate dbt).
-
-### Set Up dbt Cloud Connection
-* Log in to dbt Cloud (https://cloud.getdbt.com/).
-
-* Navigate to Account Settings → Projects → Create Project.
-
-* Under "Connection", select BigQuery.
-
-* Upload the JSON key file you downloaded earlier.
-
-* Fill in:
-
-    * Project ID: Your Google Cloud project ID.
-
-    * Dataset: Specify the dataset where dbt models will be created.
-
-    * Threads: Default is 4 (adjust based on your use case).
-
-    * Timeout: Default is 300 seconds.
-
-### Test and Save Connection
-* Click Test to verify the connection.
-
-* If successful, click Save.
-
-### Initialize dbt Project
-* Once connected, create a new dbt project.
-
-* You can start adding models and running dbt run, dbt test, etc.
-
-### Run dbt Commands
-* Use the dbt Cloud IDE or set up a CI/CD pipeline.
-
-* Run dbt run to execute transformations in BigQuery.
+```sh
+dbt run
+dbt test
