@@ -1,6 +1,6 @@
 # Introducetion of dbt(data build tool)
 dbt (data build tool) as a tool that helps you clean, transform, and organize data inside a data warehouse
-![alt text](https://github.com/Yaxin12/dbt_demo/tree/main/image/1.png)
+![alt text](https://github.com/Yaxin12/dbt_demo/blob/main/image/1.png)
 
 ### How dbt Works
 Imagine you have a huge spreadsheet full of messy data—duplicate values, missing numbers, inconsistent formats. Before you can analyze it, you need to clean and organize it. dbt helps you do this automatically using SQL scripts.
